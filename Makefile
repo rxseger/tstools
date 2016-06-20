@@ -174,7 +174,7 @@ STATIC_LIB = $(LIBDIR)/libtstools.a
 LIBOPTS = $(ARCH_FLAGS) $(STATIC_LIB)
 
 ifeq ($(shell uname -s), Darwin)
-SHARED_LIB_NAME = libtstools.xxx
+SHARED_LIB_NAME = libtstools.dylib
 else
 SHARED_LIB_NAME = libtstools.so
 endif
@@ -227,7 +227,7 @@ ifeq ($(shell uname -s), Darwin)
 $(STATIC_LIB): $(OBJS)
 	libtool -static $(OBJS) -o $(STATIC_LIB)
 $(SHARED_LIB): $(OBJS)
-	libtool -dynamic $(OBJS) -o $(SHARED_LIB)
+	libtool -dynamic -lc $(OBJS) -o $(SHARED_LIB)
 else
 $(STATIC_LIB): $(OBJS)
 	rm -f $(STATIC_LIB)
